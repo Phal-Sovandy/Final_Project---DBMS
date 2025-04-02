@@ -281,6 +281,19 @@ END;
 $$
 DELIMITER ;
 
+-- Procedure: Get Product Details
+DELIMITER $$
+CREATE PROCEDURE GetProductDetails(IN productID INT)
+BEGIN
+    SELECT p.product_id, p.product_name, c.category_name, p.stock, p.price, p.details
+    FROM products p
+    JOIN categories c ON p.category_id = c.category_id
+    WHERE p.product_id = productID;
+END;
+$$
+DELIMITER ;
+
+
 -- Stored Procedure: Place an Order
 DELIMITER $$
 CREATE PROCEDURE PlaceOrder(
@@ -311,19 +324,6 @@ BEGIN
 
     -- Delete the order (this will cascade delete from order_details and ordered_items)
     DELETE FROM orders WHERE order_id = orderID;
-END;
-$$
-DELIMITER ;
-
-
--- Procedure: Get Product Details
-DELIMITER $$
-CREATE PROCEDURE GetProductDetails(IN productID INT)
-BEGIN
-    SELECT p.product_id, p.product_name, c.category_name, p.stock, p.price, p.details
-    FROM products p
-    JOIN categories c ON p.category_id = c.category_id
-    WHERE p.product_id = productID;
 END;
 $$
 DELIMITER ;
