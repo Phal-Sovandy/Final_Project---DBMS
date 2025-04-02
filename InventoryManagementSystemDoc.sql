@@ -3,26 +3,26 @@ USE InventoryManagementSys;
 
 CREATE TABLE manufacturers (
     manufacturer_id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    company_name VARCHAR(255) NOT NULL,
-    contact_name VARCHAR(255) NOT NULL,
+    company_name VARCHAR(100) NOT NULL,
+    contact_name VARCHAR(100) NOT NULL,
     phone VARCHAR(15) NOT NULL
 );
 
 CREATE TABLE manufacturer_locations (
     manufacturer_id INT UNSIGNED NOT NULL PRIMARY KEY,
     address VARCHAR(255) NOT NULL,
-    city VARCHAR(255) NOT NULL,
-    country VARCHAR(255) NOT NULL,
+    city VARCHAR(100) NOT NULL,
+    country VARCHAR(100) NOT NULL,
     postal_code VARCHAR(10) NOT NULL,
-    region VARCHAR(255) NOT NULL,
+    region VARCHAR(100) NOT NULL,
     CONSTRAINT fk_manufacturer_location FOREIGN KEY (manufacturer_id) REFERENCES manufacturers(manufacturer_id) ON DELETE CASCADE
 );
 
 CREATE TABLE customers (
     customer_id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    contact_name VARCHAR(255) NOT NULL,
-    contact_title VARCHAR(255) NOT NULL,
-    company_name VARCHAR(255) NOT NULL,
+    contact_name VARCHAR(100) NOT NULL,
+    contact_title VARCHAR(100) NOT NULL,
+    company_name VARCHAR(100) NOT NULL,
     age INT NOT NULL,
     gender BOOLEAN NOT NULL,
     phone VARCHAR(15) NOT NULL
@@ -31,22 +31,22 @@ CREATE TABLE customers (
 CREATE TABLE customer_locations (
     customer_id INT UNSIGNED NOT NULL PRIMARY KEY,
     address VARCHAR(255) NOT NULL,
-    city VARCHAR(255) NOT NULL,
-    country VARCHAR(255) NOT NULL,
+    city VARCHAR(100) NOT NULL,
+    country VARCHAR(100) NOT NULL,
     postal_code VARCHAR(10) NOT NULL,
-    region VARCHAR(255) NOT NULL,
+    region VARCHAR(100) NOT NULL,
     CONSTRAINT fk_customer_location FOREIGN KEY (customer_id) REFERENCES customers(customer_id) ON DELETE CASCADE
 );
 
 CREATE TABLE categories (
     category_id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    category_name VARCHAR(255) NOT NULL,
+    category_name VARCHAR(100) NOT NULL,
     description VARCHAR(255)
 );
 
 CREATE TABLE products (
     product_id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    product_name VARCHAR(255) NOT NULL,
+    product_name VARCHAR(100) NOT NULL,
     stock INT UNSIGNED NOT NULL CHECK (stock >= 0),
     price DECIMAL(10,2) NOT NULL CHECK (price > 0),
     category_id INT UNSIGNED NOT NULL,
@@ -58,8 +58,8 @@ CREATE TABLE products (
 
 CREATE TABLE employees (
     employee_id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    first_name VARCHAR(255) NOT NULL,
-    last_name VARCHAR(255) NOT NULL,
+    first_name VARCHAR(100) NOT NULL,
+    last_name VARCHAR(100) NOT NULL,
     gender BOOLEAN NOT NULL,
     salary DECIMAL(10,2) NOT NULL CHECK (salary > 0),
     birthdate DATE NOT NULL,
@@ -72,16 +72,16 @@ CREATE TABLE employees (
 CREATE TABLE employee_locations (
     employee_id INT UNSIGNED NOT NULL PRIMARY KEY,
     address VARCHAR(255) NOT NULL,
-    city VARCHAR(255) NOT NULL,
-    country VARCHAR(255) NOT NULL,
+    city VARCHAR(100) NOT NULL,
+    country VARCHAR(100) NOT NULL,
     postal_code VARCHAR(10) NOT NULL,
-    region VARCHAR(255) NOT NULL,
+    region VARCHAR(100) NOT NULL,
     CONSTRAINT fk_employee_location FOREIGN KEY (employee_id) REFERENCES employees(employee_id) ON DELETE CASCADE
 );
 
 CREATE TABLE deliveries (
     delivery_id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    company_name VARCHAR(255) NOT NULL,
+    company_name VARCHAR(100) NOT NULL,
     phone VARCHAR(15) NOT NULL
 );
 
@@ -118,10 +118,10 @@ CREATE TABLE order_details (
 CREATE TABLE order_locations (
     order_id INT UNSIGNED NOT NULL PRIMARY KEY,
     address VARCHAR(255) NOT NULL,
-    city VARCHAR(255) NOT NULL,
-    country VARCHAR(255) NOT NULL,
+    city VARCHAR(100) NOT NULL,
+    country VARCHAR(100) NOT NULL,
     postal_code VARCHAR(10) NOT NULL,
-    region VARCHAR(255) NOT NULL,
+    region VARCHAR(100) NOT NULL,
     CONSTRAINT fk_order_location FOREIGN KEY (order_id) REFERENCES order_details(order_id) ON DELETE CASCADE
 );
 
@@ -148,13 +148,8 @@ FOR EACH ROW
 BEGIN
     -- Delete customer locations
     DELETE FROM customer_locations WHERE customer_id = OLD.customer_id;
-
     -- Delete orders related to the customer
     DELETE FROM orders WHERE customer_id = OLD.customer_id;
-
-    -- Optionally, delete related ordered items and order details if necessary (cascading via foreign keys)
-    -- DELETE FROM ordered_items WHERE order_id IN (SELECT order_id FROM orders WHERE customer_id = OLD.customer_id);
-    -- DELETE FROM order_details WHERE order_id IN (SELECT order_id FROM orders WHERE customer_id = OLD.customer_id);
 END;
 $$
 DELIMITER ;
@@ -166,12 +161,6 @@ FOR EACH ROW
 BEGIN
     -- Delete employee locations
     DELETE FROM employee_locations WHERE employee_id = OLD.employee_id;
-
-    -- Optionally, set employee reference in orders to NULL (this is done automatically by foreign key on delete set null)
-    -- DELETE FROM orders WHERE employee_id = OLD.employee_id;
-
-    -- Optionally, you can delete associated orders if required (if there's a business need to do so).
-    -- DELETE FROM orders WHERE employee_id = OLD.employee_id;
 END;
 $$
 DELIMITER ;
@@ -183,7 +172,6 @@ FOR EACH ROW
 BEGIN
     -- Delete associated order items
     DELETE FROM ordered_items WHERE product_id = OLD.product_id;
-
     -- Optionally, delete related order details (if there are any, and if not already handled by cascading delete)
     DELETE FROM order_details WHERE order_id IN (SELECT order_id FROM ordered_items WHERE product_id = OLD.product_id);
 END;
@@ -208,10 +196,8 @@ FOR EACH ROW
 BEGIN
     -- Delete order items
     DELETE FROM ordered_items WHERE order_id = OLD.order_id;
-
     -- Delete order details
     DELETE FROM order_details WHERE order_id = OLD.order_id;
-
     -- Delete order location
     DELETE FROM order_locations WHERE order_id = OLD.order_id;
 END;
@@ -293,24 +279,64 @@ END;
 $$
 DELIMITER ;
 
-
 -- Stored Procedure: Place an Order
 DELIMITER $$
+
 CREATE PROCEDURE PlaceOrder(
-    IN cust_id INT, IN emp_id INT, IN del_id INT, IN ship_price DECIMAL(10,2), 
-    IN ship_dt DATETIME, IN arr_dt DATETIME
+    IN cust_id INT, 
+    IN emp_id INT, 
+    IN del_id INT, 
+    IN ship_price DECIMAL(10,2), 
+    IN ship_dt DATETIME, 
+    IN arr_dt DATETIME, 
+    IN order_address VARCHAR(255), 
+    IN order_city VARCHAR(100), 
+    IN order_country VARCHAR(100), 
+    IN order_postal_code VARCHAR(10), 
+    IN order_region VARCHAR(100)
 )
 BEGIN
+    DECLARE new_order_id INT;
+
+    -- Insert into orders
     INSERT INTO orders (customer_id, employee_id, delivery_id)
     VALUES (cust_id, emp_id, del_id);
 
-    SET @orderID = LAST_INSERT_ID();
+    -- Get the last inserted order ID
+    SET new_order_id = LAST_INSERT_ID();
 
+    -- Insert into order_details
     INSERT INTO order_details (order_id, shipping_price, ship_date, arrived_date, order_date)
-    VALUES (@orderID, ship_price, ship_dt, arr_dt, NOW());  -- Automatically sets order_date to current timestamp
-END;
-$$
+    VALUES (new_order_id, ship_price, ship_dt, arr_dt, NOW());
+
+    -- Insert into order_locations
+    INSERT INTO order_locations (order_id, address, city, country, postal_code, region)
+    VALUES (new_order_id, order_address, order_city, order_country, order_postal_code, order_region);
+
+END $$
+
 DELIMITER ;
+
+-- Stored Procedure: Add product to order
+DELIMITER $$
+
+CREATE PROCEDURE AddProductToOrder(
+    IN orderID INT UNSIGNED,
+    IN productID INT UNSIGNED,
+    IN quantity INT UNSIGNED,
+    IN discount DECIMAL(5,2)
+)
+BEGIN
+    DECLARE product_stock INT;
+
+    -- Insert product into order
+    INSERT INTO ordered_items (order_id, product_id, quantity, discount)
+    VALUES (orderID, productID, quantity, discount);
+    
+END $$
+
+DELIMITER ;
+
 
 -- Procedure: Cancel an Order and Restore Stock
 DELIMITER $$
