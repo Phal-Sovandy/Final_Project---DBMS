@@ -126,7 +126,7 @@ CREATE TABLE order_locations (
 );
 
 -- ==================== INDEXES ====================
--- Index on order date to improve search efficiency (B-Tree)
+-- Index on common search attributes to improve search efficiency (B-Tree)
 CREATE INDEX idx_order_date ON order_details(order_date);
 CREATE INDEX idx_product_name ON products(product_name);
 CREATE INDEX idx_company_name ON customers(company_name);

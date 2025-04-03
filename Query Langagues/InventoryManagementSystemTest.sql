@@ -93,6 +93,9 @@ SELECT * FROM order_details WHERE order_id = 1;
 -- ==================== Test Case 2: Delete Customer and Cascade Deletion ====================
 
 -- Step 1: Setup for the Test Case
+-- Insert a product
+INSERT INTO products (product_name, stock, price, category_id, manufacturer_id, details)
+VALUES ('Sample Product', 50, 25.00, 1, 1, 'Sample product description');
 
 -- Insert a customer using the AddCustomer procedure
 CALL AddCustomer(
@@ -108,10 +111,6 @@ CALL AddCustomer(
     '67890', 
     'Sample Region'
 );
-
--- Insert a product
-INSERT INTO products (product_name, stock, price, category_id, manufacturer_id, details)
-VALUES ('Sample Product', 50, 25.00, 1, 1, 'Sample product description');
 
 -- Place an order for the customer
 CALL PlaceOrder(
@@ -168,6 +167,9 @@ SELECT * FROM order_details WHERE order_id IN (SELECT order_id FROM orders WHERE
 SELECT * FROM ordered_items WHERE order_id IN (SELECT order_id FROM orders WHERE customer_id = 21);
 
 
+-- Additonal Test Cases
+
+-- VIEWS
 -- Test: Check data from the order_summary view
 SELECT * FROM order_summary LIMIT 10;
 
@@ -176,3 +178,17 @@ SELECT * FROM product_inventory LIMIT 10;
 
 -- Test: Check data from the customer_order_history view for a specific customer
 SELECT * FROM customer_order_history WHERE customer = 'Super Poy.';
+
+-- PROCEDURES
+-- Test: Sum all customer purchases price
+CALL GetCustomerOrders(22);
+
+-- Test: Cancel customer order
+CALL CancelOrder(2);
+
+-- FUNCTIONS
+-- Test: Calculate total of an order
+SELECT CalculateOrderTotal(2);
+
+-- Test: Find available stock of a product
+SELECT GetStockLevel(20);
