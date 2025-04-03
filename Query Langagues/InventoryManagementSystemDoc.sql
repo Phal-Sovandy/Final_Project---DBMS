@@ -141,80 +141,6 @@ UPDATE products
 SET stock = stock - NEW.quantity
 WHERE product_id = NEW.product_id;
 
-DELIMITER $$
-CREATE TRIGGER delete_customer_data
-AFTER DELETE ON customers
-FOR EACH ROW
-BEGIN
-    -- Delete customer locations
-    DELETE FROM customer_locations WHERE customer_id = OLD.customer_id;
-    -- Delete orders related to the customer
-    DELETE FROM orders WHERE customer_id = OLD.customer_id;
-END;
-$$
-DELIMITER ;
-
-DELIMITER $$
-CREATE TRIGGER delete_employee_data
-AFTER DELETE ON employees
-FOR EACH ROW
-BEGIN
-    -- Delete employee locations
-    DELETE FROM employee_locations WHERE employee_id = OLD.employee_id;
-END;
-$$
-DELIMITER ;
-
-DELIMITER $$
-CREATE TRIGGER delete_product_data
-AFTER DELETE ON products
-FOR EACH ROW
-BEGIN
-    -- Delete associated order items
-    DELETE FROM ordered_items WHERE product_id = OLD.product_id;
-    -- Optionally, delete related order details (if there are any, and if not already handled by cascading delete)
-    DELETE FROM order_details WHERE order_id IN (SELECT order_id FROM ordered_items WHERE product_id = OLD.product_id);
-END;
-$$
-DELIMITER ;
-
-DELIMITER $$
-CREATE TRIGGER delete_manufacturer_data
-AFTER DELETE ON manufacturers
-FOR EACH ROW
-BEGIN
-    -- Delete products from the manufacturer (or alternatively set their manufacturer_id to NULL)
-    DELETE FROM products WHERE manufacturer_id = OLD.manufacturer_id;
-END;
-$$
-DELIMITER ;
-
-DELIMITER $$
-CREATE TRIGGER delete_order_data
-AFTER DELETE ON orders
-FOR EACH ROW
-BEGIN
-    -- Delete order items
-    DELETE FROM ordered_items WHERE order_id = OLD.order_id;
-    -- Delete order details
-    DELETE FROM order_details WHERE order_id = OLD.order_id;
-    -- Delete order location
-    DELETE FROM order_locations WHERE order_id = OLD.order_id;
-END;
-$$
-DELIMITER ;
-
-DELIMITER $$
-CREATE TRIGGER delete_delivery_data
-AFTER DELETE ON deliveries
-FOR EACH ROW
-BEGIN
-    -- Optionally handle or log the deletion of deliveries (the foreign key constraint should handle setting delivery_id to NULL)
-    UPDATE orders SET delivery_id = NULL WHERE delivery_id = OLD.delivery_id;
-END;
-$$
-DELIMITER ;
-
 
 -- ==================== VIEWS ====================
 -- View: Order Summary
@@ -352,6 +278,98 @@ BEGIN
     DELETE FROM orders WHERE order_id = orderID;
 END;
 $$
+DELIMITER ;
+
+-- Stored Procedure: Add a New Customer
+DELIMITER $$
+CREATE PROCEDURE AddCustomer(
+    IN contact_name VARCHAR(100),
+    IN contact_title VARCHAR(100),
+    IN company_name VARCHAR(100),
+    IN age INT,
+    IN gender BOOLEAN,
+    IN phone VARCHAR(15),
+    IN address VARCHAR(255),
+    IN city VARCHAR(100),
+    IN country VARCHAR(100),
+    IN postal_code VARCHAR(10),
+    IN region VARCHAR(100)
+)
+BEGIN
+    DECLARE new_customer_id INT;
+    
+    -- Insert into customers
+    INSERT INTO customers (contact_name, contact_title, company_name, age, gender, phone)
+    VALUES (contact_name, contact_title, company_name, age, gender, phone);
+    
+    -- Get the last inserted customer ID
+    SET new_customer_id = LAST_INSERT_ID();
+    
+    -- Insert into customer_locations
+    INSERT INTO customer_locations (customer_id, address, city, country, postal_code, region)
+    VALUES (new_customer_id, address, city, country, postal_code, region);
+END $$
+DELIMITER ;
+
+-- Stored Procedure: Add a New Employee
+DELIMITER $$
+CREATE PROCEDURE AddEmployee(
+    IN first_name VARCHAR(100),
+    IN last_name VARCHAR(100),
+    IN gender BOOLEAN,
+    IN salary DECIMAL(10,2),
+    IN birthdate DATE,
+    IN hire_date DATE,
+    IN phone VARCHAR(15),
+    IN supervisor_id INT,
+    IN address VARCHAR(255),
+    IN city VARCHAR(100),
+    IN country VARCHAR(100),
+    IN postal_code VARCHAR(10),
+    IN region VARCHAR(100)
+)
+BEGIN
+    DECLARE new_employee_id INT;
+    
+    -- Insert into employees
+    INSERT INTO employees (first_name, last_name, gender, salary, birthdate, hire_date, phone, supervisor_id)
+    VALUES (first_name, last_name, gender, salary, birthdate, hire_date, phone, supervisor_id);
+    
+    -- Get the last inserted employee ID
+    SET new_employee_id = LAST_INSERT_ID();
+    
+    -- Insert into employee_locations
+    INSERT INTO employee_locations (employee_id, address, city, country, postal_code, region)
+    VALUES (new_employee_id, address, city, country, postal_code, region);
+END $$
+DELIMITER ;
+
+-- Stored Procedure: Add a New Manufacturer
+DELIMITER $$
+CREATE PROCEDURE AddManufacturer(
+    IN company_name VARCHAR(100),
+    IN contact_name VARCHAR(100),
+    IN phone VARCHAR(15),
+    IN address VARCHAR(255),
+    IN city VARCHAR(100),
+    IN country VARCHAR(100),
+    IN postal_code VARCHAR(10),
+    IN region VARCHAR(100)
+)
+BEGIN
+    DECLARE new_manufacturer_id INT;
+    
+    -- Insert into manufacturers
+    INSERT INTO manufacturers (company_name, contact_name, phone)
+    VALUES (company_name, contact_name, phone);
+    
+    -- Get the last inserted manufacturer ID
+    SET new_manufacturer_id = LAST_INSERT_ID();
+    
+    -- Insert into manufacturer_locations
+    INSERT INTO manufacturer_locations (manufacturer_id, address, city, country, postal_code, region)
+    VALUES (new_manufacturer_id, address, city, country, postal_code, region);
+END $$
 DELIMITER ;
 
 -- ==================== FUNCTIONS ====================
