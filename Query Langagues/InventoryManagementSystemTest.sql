@@ -72,7 +72,7 @@ SELECT * FROM orders WHERE customer_id = 21;
 SELECT * FROM order_details WHERE order_id = 21;
 
 -- Step 3: Add Product to the Order using `AddProductToOrder`
-CALL AddProductToOrder(1, 56, 2, 0.10);  -- 2 units, 10% discount
+CALL AddProductToOrder(21, 56, 2, 0.10);  -- 2 units, 10% discount
 
 -- Verify changes:
 -- Check the ordered_items table (should show 2 units added to the order)
@@ -88,6 +88,9 @@ SELECT * FROM ordered_items WHERE order_id = 21;
 
 -- Verify the `order_details` table (should show order details like shipping price, dates)
 SELECT * FROM order_details WHERE order_id = 21;
+
+-- Verify the `order_locations` table (should show order order_locations like address, city, country,...)
+SELECT * FROM order_locations WHERE order_id = 21;
 
 
 -- ==================== Test Case 2: Delete Customer and Cascade Deletion ====================
@@ -158,7 +161,7 @@ SELECT * FROM customers WHERE customer_id = 21;
 
 -- Check if the associated customer location was deleted
 SELECT * FROM customer_locations WHERE customer_id = 21;
-
+	 
 -- Check if the orders related to the customer were deleted
 SELECT * FROM orders WHERE customer_id = 21;
 
@@ -178,6 +181,9 @@ SELECT * FROM product_inventory LIMIT 10;
 
 -- Test: Check data from the customer_order_history view for a specific customer
 SELECT * FROM customer_order_history WHERE customer = 'Super Poy.';
+
+-- Test: Employee Performance Summary
+SELECT * FROM employee_performance;
 
 -- PROCEDURES
 -- Test: Sum all customer purchases price

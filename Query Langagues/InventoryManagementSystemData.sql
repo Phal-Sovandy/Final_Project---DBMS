@@ -1,77 +1,38 @@
 -- Insert Manufacturers
-INSERT INTO manufacturers (company_name, contact_name, phone) VALUES
-('Tech Supplies Inc.', 'John Doe', '123-456-7890'),
-('Quality Tools Ltd.', 'Jane Smith', '987-654-3210'),
-('Global Electronics', 'Michael Johnson', '111-222-3333'),
-('Mega Tools', 'Emma Watson', '444-555-6666'),
-('Precision Instruments', 'Olivia Brown', '222-333-4444'),
-('Industrial Solutions', 'Liam Wilson', '555-666-7777'),
-('Advanced Robotics Corp.', 'Sophia Turner', '888-777-6666'),
-('Innovative Devices Ltd.', 'Ethan Walker', '333-444-5555'),
-('GreenTech Systems', 'Ava Davis', '777-888-9999'),
-('TechMinds Inc.', 'Benjamin Clark', '666-555-4444');
-
-
--- Insert Manufacturer Locations
-INSERT INTO manufacturer_locations (manufacturer_id, address, city, country, postal_code, region) VALUES
-(1, '123 Tech Street', 'New York', 'USA', '10001', 'East Coast'),
-(2, '456 Industrial Ave', 'Los Angeles', 'USA', '90001', 'West Coast'),
-(3, '789 Silicon Road', 'San Francisco', 'USA', '94102', 'West Coast'),
-(4, '321 Hardware Lane', 'Dallas', 'USA', '75201', 'South'),
-(5, '555 Precision Dr', 'Houston', 'USA', '77002', 'Southwest'),
-(6, '666 Industry Blvd', 'Chicago', 'USA', '60602', 'Midwest'),
-(7, '999 Robotics Way', 'Seattle', 'USA', '98101', 'West'),
-(8, '555 Innovation Blvd', 'Boston', 'USA', '02110', 'Northeast'),
-(9, '888 GreenTech Circle', 'Portland', 'USA', '97201', 'Pacific Northwest'),
-(10, '444 TechMinds St', 'San Diego', 'USA', '92101', 'Southwest');
-
+-- company_name, contact_name, phone, address, city, country, postal_code, region
+CALL AddManufacturer('Tech Supplies Inc.', 'John Doe', '123-456-7890', '123 Tech Street', 'New York', 'USA', '10001', 'East Coast');
+CALL AddManufacturer('Quality Tools Ltd.', 'Jane Smith', '987-654-3210', '456 Industrial Ave', 'Los Angeles', 'USA', '90001', 'West Coast');
+CALL AddManufacturer('Global Electronics', 'Michael Johnson', '111-222-3333', '789 Silicon Road', 'San Francisco', 'USA', '94102', 'West Coast');
+CALL AddManufacturer('Mega Tools', 'Emma Watson', '444-555-6666', '321 Hardware Lane', 'Dallas', 'USA', '75201', 'South');
+CALL AddManufacturer('Precision Instruments', 'Olivia Brown', '222-333-4444', '555 Precision Dr', 'Houston', 'USA', '77002', 'Southwest');
+CALL AddManufacturer('Industrial Solutions', 'Liam Wilson', '555-666-7777', '666 Industry Blvd', 'Chicago', 'USA', '60602', 'Midwest');
+CALL AddManufacturer('Advanced Robotics Corp.', 'Sophia Turner', '888-777-6666', '999 Robotics Way', 'Seattle', 'USA', '98101', 'West');
+CALL AddManufacturer('Innovative Devices Ltd.', 'Ethan Walker', '333-444-5555', '555 Innovation Blvd', 'Boston', 'USA', '02110', 'Northeast');
+CALL AddManufacturer('GreenTech Systems', 'Ava Davis', '777-888-9999', '888 GreenTech Circle', 'Portland', 'USA', '97201', 'Pacific Northwest');
+CALL AddManufacturer('TechMinds Inc.', 'Benjamin Clark', '666-555-4444', '444 TechMinds St', 'San Diego', 'USA', '92101', 'Southwest');
 
 -- Insert Customers
-INSERT INTO customers (contact_name, contact_title, company_name, age, gender, phone) VALUES
-('John Doe', 'Manager', 'Acme Corp', 32, TRUE, '123-456-7890'),
-('Jane Smith', 'CEO', 'Tech Solutions', 45, FALSE, '123-456-7891'),
-('Sam Brown', 'Sales Lead', 'Brown Innovations', 28, TRUE, '123-456-7892'),
-('Alice Green', 'Marketing Lead', 'Green Enterprises', 40, FALSE, '123-456-7893'),
-('Bob White', 'Sales Associate', 'White Products', 35, TRUE, '123-456-7894'),
-('Chris Black', 'CFO', 'Black Industries', 50, TRUE, '123-456-7895'),
-('Diana Harris', 'Product Manager', 'Harris Designs', 30, FALSE, '123-456-7896'),
-('Eva Johnson', 'Lead Developer', 'Tech Works', 27, FALSE, '123-456-7897'),
-('Frank Wilson', 'CEO', 'Wilson Corporation', 55, TRUE, '123-456-7898'),
-('Gina Lee', 'Product Designer', 'Lee Creations', 33, FALSE, '123-456-7899'),
-('Henry King', 'Sales Manager', 'King Enterprises', 42, TRUE, '123-456-7900'),
-('Isabel Clark', 'Lead Marketing', 'Clark Enterprises', 38, FALSE, '123-456-7901'),
-('Jack Lewis', 'Senior Engineer', 'Lewis Industries', 48, TRUE, '123-456-7902'),
-('Kimberly Scott', 'HR Manager', 'Scott Enterprises', 36, FALSE, '123-456-7903'),
-('Liam Thomas', 'Operations Manager', 'Thomas Solutions', 49, TRUE, '123-456-7904'),
-('Monica Martinez', 'CFO', 'Martinez Group', 53, FALSE, '123-456-7905'),
-('Nina White', 'Tech Support', 'White Innovations', 29, FALSE, '123-456-7906'),
-('Oscar Gray', 'VP of Sales', 'Gray Enterprises', 44, TRUE, '123-456-7907'),
-('Paul Miller', 'Marketing Specialist', 'Miller Marketing', 31, TRUE, '123-456-7908'),
-('Quinn Cooper', 'Customer Service', 'Cooper Solutions', 26, TRUE, '123-456-7909');
-
-
--- Insert Customer Locations
-INSERT INTO customer_locations (customer_id, address, city, country, postal_code, region) VALUES
-(1, '123 Oak St', 'New York', 'USA', '10001', 'East'),
-(2, '456 Maple Ave', 'San Francisco', 'USA', '94105', 'West'),
-(3, '789 Pine Rd', 'Chicago', 'USA', '60616', 'Midwest'),
-(4, '101 Birch Ln', 'Los Angeles', 'USA', '90001', 'West'),
-(5, '202 Cedar Blvd', 'Miami', 'USA', '33101', 'South'),
-(6, '303 Elm Dr', 'Seattle', 'USA', '98101', 'West'),
-(7, '404 Willow Way', 'Austin', 'USA', '73301', 'South'),
-(8, '505 Maple Ct', 'Boston', 'USA', '02108', 'Northeast'),
-(9, '606 Pine St', 'Denver', 'USA', '80202', 'West'),
-(10, '707 Oak Rd', 'Atlanta', 'USA', '30303', 'South'),
-(11, '808 Birch Ave', 'Dallas', 'USA', '75201', 'South'),
-(12, '909 Cedar St', 'Houston', 'USA', '77001', 'South'),
-(13, '1010 Elm Ave', 'Phoenix', 'USA', '85001', 'West'),
-(14, '1111 Willow Ln', 'Portland', 'USA', '97201', 'West'),
-(15, '1212 Maple Dr', 'San Diego', 'USA', '92101', 'West'),
-(16, '1313 Oak Ave', 'Salt Lake City', 'USA', '84101', 'West'),
-(17, '1414 Birch Rd', 'Tampa', 'USA', '33601', 'South'),
-(18, '1515 Cedar Dr', 'Minneapolis', 'USA', '55101', 'Midwest'),
-(19, '1616 Elm Ln', 'Cleveland', 'USA', '44101', 'Midwest'),
-(20, '1717 Willow Ct', 'Charlotte', 'USA', '28201', 'South');
+-- contact_name, contact_title, company_name, age, gender, phone, address, city, country, postal_code, region
+CALL AddCustomer('John Doe', 'Manager', 'Acme Corp', 32, TRUE, '123-456-7890', '123 Oak St', 'New York', 'USA', '10001', 'East');
+CALL AddCustomer('Jane Smith', 'CEO', 'Tech Solutions', 45, FALSE, '123-456-7891', '456 Maple Ave', 'San Francisco', 'USA', '94105', 'West');
+CALL AddCustomer('Sam Brown', 'Sales Lead', 'Brown Innovations', 28, TRUE, '123-456-7892', '789 Pine Rd', 'Chicago', 'USA', '60616', 'Midwest');
+CALL AddCustomer('Alice Green', 'Marketing Lead', 'Green Enterprises', 40, FALSE, '123-456-7893', '101 Birch Ln', 'Los Angeles', 'USA', '90001', 'West');
+CALL AddCustomer('Bob White', 'Sales Associate', 'White Products', 35, TRUE, '123-456-7894', '202 Cedar Blvd', 'Miami', 'USA', '33101', 'South');
+CALL AddCustomer('Chris Black', 'CFO', 'Black Industries', 50, TRUE, '123-456-7895', '303 Elm Dr', 'Seattle', 'USA', '98101', 'West');
+CALL AddCustomer('Diana Harris', 'Product Manager', 'Harris Designs', 30, FALSE, '123-456-7896', '404 Willow Way', 'Austin', 'USA', '73301', 'South');
+CALL AddCustomer('Eva Johnson', 'Lead Developer', 'Tech Works', 27, FALSE, '123-456-7897', '505 Maple Ct', 'Boston', 'USA', '02108', 'Northeast');
+CALL AddCustomer('Frank Wilson', 'CEO', 'Wilson Corporation', 55, TRUE, '123-456-7898', '606 Pine St', 'Denver', 'USA', '80202', 'West');
+CALL AddCustomer('Gina Lee', 'Product Designer', 'Lee Creations', 33, FALSE, '123-456-7899', '707 Oak Rd', 'Atlanta', 'USA', '30303', 'South');
+CALL AddCustomer('Henry King', 'Sales Manager', 'King Enterprises', 42, TRUE, '123-456-7900', '808 Birch Ave', 'Dallas', 'USA', '75201', 'South');
+CALL AddCustomer('Isabel Clark', 'Lead Marketing', 'Clark Enterprises', 38, FALSE, '123-456-7901', '909 Cedar St', 'Houston', 'USA', '77001', 'South');
+CALL AddCustomer('Jack Lewis', 'Senior Engineer', 'Lewis Industries', 48, TRUE, '123-456-7902', '1010 Elm Ave', 'Phoenix', 'USA', '85001', 'West');
+CALL AddCustomer('Kimberly Scott', 'HR Manager', 'Scott Enterprises', 36, FALSE, '123-456-7903', '1111 Willow Ln', 'Portland', 'USA', '97201', 'West');
+CALL AddCustomer('Liam Thomas', 'Operations Manager', 'Thomas Solutions', 49, TRUE, '123-456-7904', '1212 Maple Dr', 'San Diego', 'USA', '92101', 'West');
+CALL AddCustomer('Monica Martinez', 'CFO', 'Martinez Group', 53, FALSE, '123-456-7905', '1313 Oak Ave', 'Salt Lake City', 'USA', '84101', 'West');
+CALL AddCustomer('Nina White', 'Tech Support', 'White Innovations', 29, FALSE, '123-456-7906', '1414 Birch Rd', 'Tampa', 'USA', '33601', 'South');
+CALL AddCustomer('Oscar Gray', 'VP of Sales', 'Gray Enterprises', 44, TRUE, '123-456-7907', '1515 Cedar Dr', 'Minneapolis', 'USA', '55101', 'Midwest');
+CALL AddCustomer('Paul Miller', 'Marketing Specialist', 'Miller Marketing', 31, TRUE, '123-456-7908', '1616 Elm Ln', 'Cleveland', 'USA', '44101', 'Midwest');
+CALL AddCustomer('Quinn Cooper', 'Customer Service', 'Cooper Solutions', 26, TRUE, '123-456-7909', '1717 Willow Ct', 'Charlotte', 'USA', '28201', 'South');
 
 -- Insert Categories
 INSERT INTO categories (category_name, description) VALUES
@@ -141,50 +102,27 @@ INSERT INTO products (product_name, stock, price, category_id, manufacturer_id, 
 
 
 -- Insert Employees
-INSERT INTO employees (first_name, last_name, gender, salary, birthdate, hire_date, phone, supervisor_id) VALUES
-('Alice', 'Green', FALSE, 55000.00, '1990-02-15', '2015-06-10', '234-567-8901', NULL),
-('Bob', 'Taylor', TRUE, 48000.00, '1985-07-25', '2010-03-05', '234-567-8902', NULL),
-('Charlie', 'King', TRUE, 50000.00, '1987-12-01', '2012-04-13', '234-567-8903', NULL),
-('David', 'Black', TRUE, 51000.00, '1988-05-20', '2013-02-15', '234-567-8904', NULL),
-('Eve', 'White', FALSE, 60000.00, '1991-08-22', '2018-01-15', '234-567-8999', NULL),
-('Fiona', 'Blue', FALSE, 45000.00, '1992-03-18', '2017-11-12', '234-567-8905', NULL),
-('George', 'Brown', TRUE, 54000.00, '1980-11-09', '2009-07-30', '234-567-8906', NULL),
-('Hannah', 'Clark', FALSE, 47000.00, '1986-04-04', '2011-09-01', '234-567-8907', NULL),
-('Ivy', 'Davis', FALSE, 53000.00, '1993-01-14', '2020-05-24', '234-567-8908', NULL),
-('Jack', 'Evans', TRUE, 49000.00, '1990-07-30', '2016-03-20', '234-567-8909', NULL),
-('Kelly', 'Ford', FALSE, 55000.00, '1989-09-17', '2014-04-11', '234-567-8910', NULL),
-('Liam', 'Gray', TRUE, 51000.00, '1987-10-25', '2012-02-02', '234-567-8911', NULL),
-('Megan', 'Hall', FALSE, 47000.00, '1988-06-30', '2015-05-10', '234-567-8912', NULL),
-('Nathan', 'Irving', TRUE, 48000.00, '1986-08-15', '2010-11-17', '234-567-8913', NULL),
-('Olivia', 'Jones', FALSE, 56000.00, '1992-12-10', '2019-01-06', '234-567-8914', NULL),
-('Paul', 'King', TRUE, 52000.00, '1983-02-09', '2007-03-08', '234-567-8915', NULL),
-('Quincy', 'Lee', TRUE, 46000.00, '1990-10-05', '2014-08-22', '234-567-8916', NULL),
-('Rachel', 'Miller', FALSE, 50000.00, '1985-05-13', '2012-12-03', '234-567-8917', NULL),
-('Steven', 'Nelson', TRUE, 49000.00, '1984-09-25', '2011-06-17', '234-567-8918', NULL),
-('Tina', 'O Brien', FALSE, 52000.00, '1990-03-30', '2016-04-19', '234-567-8919', NULL);
-
--- Insert Employee Locations
-INSERT INTO employee_locations (employee_id, address, city, country, postal_code, region) VALUES
-(1, '1234 Elm Street', 'New York', 'USA', '10001', 'NY'),
-(2, '5678 Oak Avenue', 'Los Angeles', 'USA', '90001', 'CA'),
-(3, '2345 Pine Road', 'Chicago', 'USA', '60007', 'IL'),
-(4, '6789 Maple Lane', 'Houston', 'USA', '77001', 'TX'),
-(5, '3456 Birch Blvd', 'Phoenix', 'USA', '85001', 'AZ'),
-(6, '7890 Cedar Street', 'Philadelphia', 'USA', '19101', 'PA'),
-(7, '1357 Redwood Drive', 'San Antonio', 'USA', '78201', 'TX'),
-(8, '2468 Willow Way', 'San Diego', 'USA', '92101', 'CA'),
-(9, '5432 Spruce Court', 'Dallas', 'USA', '75201', 'TX'),
-(10, '9876 Fir Avenue', 'Austin', 'USA', '73301', 'TX'),
-(11, '1122 Chestnut Road', 'Jacksonville', 'USA', '32201', 'FL'),
-(12, '3344 Oakwood Blvd', 'Columbus', 'USA', '43201', 'OH'),
-(13, '5567 Pinecrest Drive', 'Charlotte', 'USA', '28201', 'NC'),
-(14, '7789 Cedar Ridge', 'Detroit', 'USA', '48201', 'MI'),
-(15, '9901 Birchwood Lane', 'Seattle', 'USA', '98001', 'WA'),
-(16, '2233 Maple Street', 'Denver', 'USA', '80201', 'CO'),
-(17, '4455 Willowbrook Ave', 'Washington', 'USA', '20001', 'DC'),
-(18, '6677 Redwood Drive', 'Boston', 'USA', '02101', 'MA'),
-(19, '8899 Spruce Terrace', 'Miami', 'USA', '33101', 'FL'),
-(20, '1010 Pinewood Place', 'Atlanta', 'USA', '30301', 'GA');
+-- first_name, last_name, gender, salary, birthdate, hire_date, phone, supervisor_id, address, city, country, postal_code, region
+CALL AddEmployee('Alice', 'Green', FALSE, 55000.00, '1990-02-15', '2015-06-10', '234-567-8901', NULL, '1234 Elm Street', 'New York', 'USA', '10001', 'NY');
+CALL AddEmployee('Bob', 'Taylor', TRUE, 48000.00, '1985-07-25', '2010-03-05', '234-567-8902', NULL, '5678 Oak Avenue', 'Los Angeles', 'USA', '90001', 'CA');
+CALL AddEmployee('Charlie', 'King', TRUE, 50000.00, '1987-12-01', '2012-04-13', '234-567-8903', NULL, '2345 Pine Road', 'Chicago', 'USA', '60007', 'IL');
+CALL AddEmployee('David', 'Black', TRUE, 51000.00, '1988-05-20', '2013-02-15', '234-567-8904', NULL, '6789 Maple Lane', 'Houston', 'USA', '77001', 'TX');
+CALL AddEmployee('Eve', 'White', FALSE, 60000.00, '1991-08-22', '2018-01-15', '234-567-8999', NULL, '3456 Birch Blvd', 'Phoenix', 'USA', '85001', 'AZ');
+CALL AddEmployee('Fiona', 'Blue', FALSE, 45000.00, '1992-03-18', '2017-11-12', '234-567-8905', NULL, '7890 Cedar Street', 'Philadelphia', 'USA', '19101', 'PA');
+CALL AddEmployee('George', 'Brown', TRUE, 54000.00, '1980-11-09', '2009-07-30', '234-567-8906', NULL, '1357 Redwood Drive', 'San Antonio', 'USA', '78201', 'TX');
+CALL AddEmployee('Hannah', 'Clark', FALSE, 47000.00, '1986-04-04', '2011-09-01', '234-567-8907', NULL, '2468 Willow Way', 'San Diego', 'USA', '92101', 'CA');
+CALL AddEmployee('Ivy', 'Davis', FALSE, 53000.00, '1993-01-14', '2020-05-24', '234-567-8908', NULL, '5432 Spruce Court', 'Dallas', 'USA', '75201', 'TX');
+CALL AddEmployee('Jack', 'Evans', TRUE, 49000.00, '1990-07-30', '2016-03-20', '234-567-8909', NULL, '9876 Fir Avenue', 'Austin', 'USA', '73301', 'TX');
+CALL AddEmployee('Kelly', 'Ford', FALSE, 55000.00, '1989-09-17', '2014-04-11', '234-567-8910', NULL, '1122 Chestnut Road', 'Jacksonville', 'USA', '32201', 'FL');
+CALL AddEmployee('Liam', 'Gray', TRUE, 51000.00, '1987-10-25', '2012-02-02', '234-567-8911', NULL, '3344 Oakwood Blvd', 'Columbus', 'USA', '43201', 'OH');
+CALL AddEmployee('Megan', 'Hall', FALSE, 47000.00, '1988-06-30', '2015-05-10', '234-567-8912', NULL, '5567 Pinecrest Drive', 'Charlotte', 'USA', '28201', 'NC');
+CALL AddEmployee('Nathan', 'Irving', TRUE, 48000.00, '1986-08-15', '2010-11-17', '234-567-8913', NULL, '7789 Cedar Ridge', 'Detroit', 'USA', '48201', 'MI');
+CALL AddEmployee('Olivia', 'Jones', FALSE, 56000.00, '1992-12-10', '2019-01-06', '234-567-8914', NULL, '9901 Birchwood Lane', 'Seattle', 'USA', '98001', 'WA');
+CALL AddEmployee('Paul', 'King', TRUE, 52000.00, '1983-02-09', '2007-03-08', '234-567-8915', NULL, '2233 Maple Street', 'Denver', 'USA', '80201', 'CO');
+CALL AddEmployee('Quincy', 'Lee', TRUE, 46000.00, '1990-10-05', '2014-08-22', '234-567-8916', NULL, '4455 Willowbrook Ave', 'Washington', 'USA', '20001', 'DC');
+CALL AddEmployee('Rachel', 'Miller', FALSE, 50000.00, '1985-05-13', '2012-12-03', '234-567-8917', NULL, '6677 Redwood Drive', 'Boston', 'USA', '02101', 'MA');
+CALL AddEmployee('Steven', 'Nelson', TRUE, 49000.00, '1984-09-25', '2011-06-17', '234-567-8918', NULL, '8899 Spruce Terrace', 'Miami', 'USA', '33101', 'FL');
+CALL AddEmployee('Tina', 'O Brien', FALSE, 52000.00, '1990-03-30', '2016-04-19', '234-567-8919', NULL, '1010 Pinewood Place', 'Atlanta', 'USA', '30301', 'GA');
 
 -- Insert Deliveries
 INSERT INTO deliveries (company_name, phone) VALUES
@@ -195,60 +133,59 @@ INSERT INTO deliveries (company_name, phone) VALUES
 ('Speedy Logistics', '555-111-0005');
 
 -- Insert Orders
-INSERT INTO orders (customer_id, employee_id, delivery_id)
-VALUES
-(1, 1, 1),
-(2, 2, 2),
-(3, 3, 3),
-(4, 4, 4),
-(5, 5, 5),
-(6, 6, 1),
-(7, 7, 2),
-(8, 8, 3),
-(9, 9, 4),
-(10, 10, 5),
-(11, 11, 1),
-(12, 12, 2),
-(13, 13, 3),
-(14, 14, 4),
-(15, 15, 5),
-(16, 16, 1),
-(17, 17, 2),
-(18, 18, 3),
-(19, 19, 4),
-(20, 20, 5);
-
--- Insert Orders_Details
-INSERT INTO order_details (order_id, shipping_price, ship_date, arrived_date, order_date)
-VALUES
-(1, 10.00, '2025-04-01 10:00:00', '2025-04-03 10:00:00', '2025-04-01 09:00:00'),
-(2, 12.50, '2025-04-02 11:00:00', '2025-04-04 11:00:00', '2025-04-02 10:00:00'),
-(3, 15.00, '2025-04-03 12:00:00', '2025-04-05 12:00:00', '2025-04-03 11:00:00'),
-(4, 9.00, '2025-04-04 13:00:00', '2025-04-06 13:00:00', '2025-04-04 12:00:00'),
-(5, 20.00, '2025-04-05 14:00:00', '2025-04-07 14:00:00', '2025-04-05 13:00:00'),
-(6, 8.50, '2025-04-06 15:00:00', '2025-04-08 15:00:00', '2025-04-06 14:00:00'),
-(7, 18.00, '2025-04-07 16:00:00', '2025-04-09 16:00:00', '2025-04-07 15:00:00'),
-(8, 22.00, '2025-04-08 17:00:00', '2025-04-10 17:00:00', '2025-04-08 16:00:00'),
-(9, 10.50, '2025-04-09 18:00:00', '2025-04-11 18:00:00', '2025-04-09 17:00:00'),
-(10, 16.00, '2025-04-10 19:00:00', '2025-04-12 19:00:00', '2025-04-10 18:00:00'),
-(11, 7.50, '2025-04-11 20:00:00', '2025-04-13 20:00:00', '2025-04-11 19:00:00'),
-(12, 14.00, '2025-04-12 21:00:00', '2025-04-14 21:00:00', '2025-04-12 20:00:00'),
-(13, 11.00, '2025-04-13 22:00:00', '2025-04-15 22:00:00', '2025-04-13 21:00:00'),
-(14, 9.50, '2025-04-14 23:00:00', '2025-04-16 23:00:00', '2025-04-14 22:00:00'),
-(15, 17.50, '2025-04-15 00:00:00', '2025-04-17 00:00:00', '2025-04-15 23:00:00'),
-(16, 19.50, '2025-04-16 01:00:00', '2025-04-18 01:00:00', '2025-04-16 00:00:00'),
-(17, 21.00, '2025-04-17 02:00:00', '2025-04-19 02:00:00', '2025-04-17 01:00:00'),
-(18, 8.00, '2025-04-18 03:00:00', '2025-04-20 03:00:00', '2025-04-18 02:00:00'),
-(19, 12.00, '2025-04-19 04:00:00', '2025-04-21 04:00:00', '2025-04-19 03:00:00'),
-(20, 10.00, '2025-04-20 05:00:00', '2025-04-22 05:00:00', '2025-04-20 04:00:00');
-
+-- cust_id, emp_id, del_id, ship_price, ship_dt, arr_dt, order_address, order_city, order_city, order_country, order_postal_code, order_region
+CALL PlaceOrder(1, 1, 1, 10.00, '2025-04-01 10:00:00', '2025-04-03 10:00:00', '123 Order Street', 'New York', 'USA', '10001', 'NY');
+CALL PlaceOrder(2, 2, 2, 12.50, '2025-04-02 11:00:00', '2025-04-04 11:00:00', '456 Delivery Ave', 'Los Angeles', 'USA', '90001', 'CA');
+CALL PlaceOrder(3, 3, 3, 15.00, '2025-04-03 12:00:00', '2025-04-05 12:00:00', '789 Shipping Rd', 'Chicago', 'USA', '60007', 'IL');
+CALL PlaceOrder(4, 4, 4, 9.00, '2025-04-04 13:00:00', '2025-04-06 13:00:00', '101 Order Blvd', 'Houston', 'USA', '77001', 'TX');
+CALL PlaceOrder(5, 5, 5, 20.00, '2025-04-05 14:00:00', '2025-04-07 14:00:00', '202 Express Way', 'Phoenix', 'USA', '85001', 'AZ');
+CALL PlaceOrder(6, 6, 1, 8.50, '2025-04-06 15:00:00', '2025-04-08 15:00:00', '303 Fast Lane', 'Philadelphia', 'USA', '19101', 'PA');
+CALL PlaceOrder(7, 7, 2, 18.00, '2025-04-07 16:00:00', '2025-04-09 16:00:00', '404 Quick Rd', 'San Antonio', 'USA', '78201', 'TX');
+CALL PlaceOrder(8, 8, 3, 22.00, '2025-04-08 17:00:00', '2025-04-10 17:00:00', '505 Rapid Ave', 'San Diego', 'USA', '92101', 'CA');
+CALL PlaceOrder(9, 9, 4, 10.50, '2025-04-09 18:00:00', '2025-04-11 18:00:00', '606 Fasttrack St', 'Dallas', 'USA', '75201', 'TX');
+CALL PlaceOrder(10, 10, 5, 16.00, '2025-04-10 19:00:00', '2025-04-12 19:00:00', '707 Speed Blvd', 'Austin', 'USA', '73301', 'TX');
+CALL PlaceOrder(11, 11, 1, 7.50, '2025-04-11 20:00:00', '2025-04-13 20:00:00', '808 Quick Ship Rd', 'Jacksonville', 'USA', '32201', 'FL');
+CALL PlaceOrder(12, 12, 2, 14.00, '2025-04-12 21:00:00', '2025-04-14 21:00:00', '909 Express St', 'Columbus', 'USA', '43201', 'OH');
+CALL PlaceOrder(13, 13, 3, 11.00, '2025-04-13 22:00:00', '2025-04-15 22:00:00', '1010 Airway Ave', 'Charlotte', 'USA', '28201', 'NC');
+CALL PlaceOrder(14, 14, 4, 9.50, '2025-04-14 23:00:00', '2025-04-16 23:00:00', '1111 Swift St', 'Detroit', 'USA', '48201', 'MI');
+CALL PlaceOrder(15, 15, 5, 17.50, '2025-04-15 00:00:00', '2025-04-17 00:00:00', '1212 Rapid Lane', 'Seattle', 'USA', '98001', 'WA');
+CALL PlaceOrder(16, 16, 1, 19.50, '2025-04-16 01:00:00', '2025-04-18 01:00:00', '1313 Jet Rd', 'Denver', 'USA', '80201', 'CO');
+CALL PlaceOrder(17, 17, 2, 21.00, '2025-04-17 02:00:00', '2025-04-19 02:00:00', '1414 Flyer Ave', 'Washington', 'USA', '20001', 'DC');
+CALL PlaceOrder(18, 18, 3, 8.00, '2025-04-18 03:00:00', '2025-04-20 03:00:00', '1515 Turbo St', 'Boston', 'USA', '02101', 'MA');
+CALL PlaceOrder(19, 19, 4, 12.00, '2025-04-19 04:00:00', '2025-04-21 04:00:00', '1616 Rocket Ave', 'Miami', 'USA', '33101', 'FL');
+CALL PlaceOrder(20, 20, 5, 10.00, '2025-04-20 05:00:00', '2025-04-22 05:00:00', '1717 Warp Lane', 'Atlanta', 'USA', '30301', 'GA');
 
 -- Insert Order Items
-INSERT INTO ordered_items (order_id, product_id, quantity, discount)
-VALUES
-(1, 1, 1, 0.05), (1, 2, 2, 0.10), (1, 3, 1, 0.15), (1, 4, 1, 0.20), (1, 5, 2, 0.25), (1, 6, 1, 0.30),
-(2, 7, 1, 0.05), (2, 8, 2, 0.10), (2, 9, 1, 0.15), (2, 10, 1, 0.20), (2, 11, 2, 0.25), (2, 12, 1, 0.30),
-(3, 13, 1, 0.05), (3, 14, 2, 0.10), (3, 15, 1, 0.15), (3, 16, 1, 0.20), (3, 17, 2, 0.25), (3, 18, 1, 0.30),
-(4, 19, 1, 0.05), (4, 20, 2, 0.10), (4, 1, 1, 0.15), (4, 2, 1, 0.20), (4, 3, 2, 0.25), (4, 4, 1, 0.30),
-(5, 5, 1, 0.05), (5, 6, 2, 0.10), (5, 7, 1, 0.15), (5, 8, 1, 0.20), (5, 9, 2, 0.25), (5, 10, 1, 0.30),
-(6, 11, 1, 0.05), (6, 12, 2, 0.10), (6, 13, 1, 0.15);
+CALL AddProductToOrder(1, 1, 1, 0.05);
+CALL AddProductToOrder(1, 2, 2, 0.10); 
+CALL AddProductToOrder(1, 3, 1, 0.15); 
+CALL AddProductToOrder(1, 4, 1, 0.20); 
+CALL AddProductToOrder(1, 5, 2, 0.25); 
+CALL AddProductToOrder(1, 6, 1, 0.30);
+CALL AddProductToOrder(2, 7, 1, 0.05); 
+CALL AddProductToOrder(2, 8, 2, 0.10); 
+CALL AddProductToOrder(2, 9, 1, 0.15);
+CALL AddProductToOrder(2, 10, 1, 0.20); 
+CALL AddProductToOrder(2, 11, 2, 0.25); 
+CALL AddProductToOrder(2, 12, 1, 0.30);
+CALL AddProductToOrder(3, 13, 1, 0.05); 
+CALL AddProductToOrder(3, 14, 2, 0.10); 
+CALL AddProductToOrder(3, 15, 1, 0.15); 
+CALL AddProductToOrder(3, 16, 1, 0.20); 
+CALL AddProductToOrder(3, 17, 2, 0.25); 
+CALL AddProductToOrder(3, 18, 1, 0.30);
+CALL AddProductToOrder(4, 19, 1, 0.05); 
+CALL AddProductToOrder(4, 20, 2, 0.10); 
+CALL AddProductToOrder(4, 1, 1, 0.15); 
+CALL AddProductToOrder(4, 2, 1, 0.20); 
+CALL AddProductToOrder(4, 3, 2, 0.25); 
+CALL AddProductToOrder(4, 4, 1, 0.30);
+CALL AddProductToOrder(5, 5, 1, 0.05); 
+CALL AddProductToOrder(5, 6, 2, 0.10); 
+CALL AddProductToOrder(5, 7, 1, 0.15); 
+CALL AddProductToOrder(5, 8, 1, 0.20); 
+CALL AddProductToOrder(5, 9, 2, 0.25);
+CALL AddProductToOrder(5, 10, 1, 0.30);
+CALL AddProductToOrder(6, 11, 1, 0.05); 
+CALL AddProductToOrder(6, 12, 2, 0.10);
+CALL AddProductToOrder(6, 13, 1, 0.15);
