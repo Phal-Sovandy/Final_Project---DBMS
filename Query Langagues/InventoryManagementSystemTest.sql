@@ -69,14 +69,14 @@ CALL PlaceOrder(
 SELECT * FROM orders WHERE customer_id = 21;
 
 -- Check if the order details are inserted (should return order details)
-SELECT * FROM order_details WHERE order_id = 1;
+SELECT * FROM order_details WHERE order_id = 21;
 
 -- Step 3: Add Product to the Order using `AddProductToOrder`
 CALL AddProductToOrder(1, 56, 2, 0.10);  -- 2 units, 10% discount
 
 -- Verify changes:
 -- Check the ordered_items table (should show 2 units added to the order)
-SELECT * FROM ordered_items WHERE order_id = 1;
+SELECT * FROM ordered_items WHERE order_id = 21;
 
 -- Step 4: Verify Stock Update
 -- Check if the stock is updated (should show stock = 98)
@@ -84,10 +84,10 @@ SELECT product_name, stock FROM products WHERE product_name = 'Test Product';
 
 -- Step 5: Verify Data in `ordered_items` and `order_details`
 -- Verify the `ordered_items` table (should show 2 units of 'Test Product' added to the order)
-SELECT * FROM ordered_items WHERE order_id = 1;
+SELECT * FROM ordered_items WHERE order_id = 21;
 
 -- Verify the `order_details` table (should show order details like shipping price, dates)
-SELECT * FROM order_details WHERE order_id = 1;
+SELECT * FROM order_details WHERE order_id = 21;
 
 
 -- ==================== Test Case 2: Delete Customer and Cascade Deletion ====================
@@ -144,8 +144,8 @@ SELECT * FROM products WHERE product_name = 'Sample Product';
 SELECT * FROM orders WHERE customer_id = 22;
 
 -- Check the order details and ordered items
-SELECT * FROM order_details WHERE order_id = 2;
-SELECT * FROM ordered_items WHERE order_id = 2;
+SELECT * FROM order_details WHERE order_id = 22;
+SELECT * FROM ordered_items WHERE order_id = 22;
 
 
 -- Step 2: Delete the Customer
@@ -188,7 +188,7 @@ CALL CancelOrder(2);
 
 -- FUNCTIONS
 -- Test: Calculate total of an order
-SELECT CalculateOrderTotal(2);
+SELECT CalculateOrderTotal(5);
 
 -- Test: Find available stock of a product
 SELECT GetStockLevel(20);
