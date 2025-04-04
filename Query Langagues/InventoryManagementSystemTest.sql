@@ -131,7 +131,7 @@ CALL PlaceOrder(
 );
 
 -- Add product to the order
-CALL AddProductToOrder(2, 57, 13, 0.05);  -- Add 13 unit of 'Sample Product' with a 5% discount
+CALL AddProductToOrder(22, 57, 13, 0.05);  -- Add 13 unit of 'Sample Product' with a 5% discount
 
 -- Verify changes:
 -- Check that the customer was inserted

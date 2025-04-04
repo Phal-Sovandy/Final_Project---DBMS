@@ -151,7 +151,8 @@ FROM orders o
 JOIN customers c ON o.customer_id = c.customer_id
 JOIN employees e ON o.employee_id = e.employee_id
 JOIN deliveries d ON o.delivery_id = d.delivery_id
-JOIN order_details od ON o.order_id = od.order_id;
+JOIN order_details od ON o.order_id = od.order_id
+ORDER BY o.order_id;
 
 -- View: Product Inventory
 CREATE VIEW product_inventory AS
