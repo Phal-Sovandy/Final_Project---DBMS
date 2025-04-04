@@ -1,9 +1,10 @@
+DROP DATABASE InventoryManagementSys;
 CREATE DATABASE InventoryManagementSys;
 USE InventoryManagementSys;
 
 CREATE TABLE manufacturers (
     manufacturer_id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    company_name VARCHAR(100) NOT NULL,
+    company_name VARCHAR(100) NOT NULL UNIQUE,
     contact_name VARCHAR(100) NOT NULL,
     phone VARCHAR(15) NOT NULL
 );
@@ -40,13 +41,13 @@ CREATE TABLE customer_locations (
 
 CREATE TABLE categories (
     category_id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    category_name VARCHAR(100) NOT NULL,
+    category_name VARCHAR(100) NOT NULL UNIQUE,
     description VARCHAR(255)
 );
 
 CREATE TABLE products (
     product_id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    product_name VARCHAR(100) NOT NULL,
+    product_name VARCHAR(100) NOT NULL UNIQUE,
     stock INT UNSIGNED NOT NULL CHECK (stock >= 0),
     price DECIMAL(10,2) NOT NULL CHECK (price > 0),
     category_id INT UNSIGNED NOT NULL,
@@ -81,7 +82,7 @@ CREATE TABLE employee_locations (
 
 CREATE TABLE deliveries (
     delivery_id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    company_name VARCHAR(100) NOT NULL,
+    company_name VARCHAR(100) NOT NULL UNIQUE,
     phone VARCHAR(15) NOT NULL
 );
 

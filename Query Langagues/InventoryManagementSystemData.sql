@@ -95,7 +95,6 @@ INSERT INTO products (product_name, stock, price, category_id, manufacturer_id, 
 ('4K Camera', 120, 499.99, 1, 4, 'Ultra high-definition 4K camera with image stabilization and zoom lens.'),
 ('Wireless Earbuds', 200, 89.99, 2, 5, 'True wireless earbuds with noise cancellation and long battery life.'),
 ('Waterproof Bluetooth Speaker', 250, 129.99, 3, 1, 'Portable Bluetooth speaker with waterproof rating and high-quality sound.'),
-('Smart Thermostat', 150, 99.99, 1, 2, 'Programmable thermostat with Wi-Fi connectivity for home temperature control.'),
 ('Coffee Table', 80, 149.99, 4, 3, 'Modern coffee table with a glass top and wooden legs.'),
 ('Fitness Tracker', 200, 59.99, 5, 4, 'Slim fitness tracker with heart rate monitoring and step tracking.'),
 ('Gaming Monitor', 120, 249.99, 1, 5, 'High refresh rate gaming monitor with ultra-fast response time.');
