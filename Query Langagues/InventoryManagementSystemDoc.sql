@@ -1,4 +1,3 @@
-DROP DATABASE InventoryManagementSys;
 CREATE DATABASE InventoryManagementSys;
 USE InventoryManagementSys;
 
